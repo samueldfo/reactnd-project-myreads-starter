@@ -26,7 +26,6 @@ export class Search extends Component {
           <ol className="books-grid"></ol>
         </div>
       </div>
-
     )
   }
 
