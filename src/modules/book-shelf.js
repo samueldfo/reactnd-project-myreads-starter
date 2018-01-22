@@ -6,7 +6,7 @@ export class BookShelf extends Component {
 
   render() {
 
-    const { titles, books } = this.props
+    const { books } = this.props
 
     const mountBooks = (book) => <li key={book.id}><Book book={book} /></li>
 
@@ -25,7 +25,7 @@ export class BookShelf extends Component {
 
     return (
       <div>
-        {Object.entries(titles).map(([title, key]) =>
+        {Object.entries(Constants.shelfTitle).map(([title, key]) =>
           <div key={key} className="bookshelf">
             <h2 className="bookshelf-title">{key}</h2>
             <div className="bookshelf-books">

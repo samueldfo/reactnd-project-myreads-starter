@@ -16,7 +16,6 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    
     BooksAPI.getAll().then((books) =>
       this.setState({
         books: {
@@ -39,7 +38,7 @@ export class Home extends Component {
           </div>
           <div className="list-books-content">
             <div>
-              <BookShelf titles={Constants.shelfTitle} books={this.state.books} />
+              <BookShelf books={this.state.books} />
             </div>
           </div>
           <div className='open-search'>
