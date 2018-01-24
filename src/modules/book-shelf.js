@@ -19,7 +19,7 @@ export class BookShelf extends Component {
         case Constants.shelfState.read:
           return books.read.map(book => mountBooks(book))
         default:
-          return books.none.map(book => mountBooks(book))
+          return
       }
     }
 
