@@ -1,10 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class Book extends Component {
-
-  render() {
-
-    const { book } = this.props
+export const Book = ({book}) => {
 
     return (
       <div className="book">
@@ -24,5 +20,4 @@ export class Book extends Component {
         <div className="book-authors">{book.authors[0]}</div>
       </div>
     )
-  }
 }
