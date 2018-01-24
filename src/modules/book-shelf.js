@@ -26,14 +26,9 @@ export class BookShelf extends Component {
   }
 
   updateBookCategory = (book, category) => {
-    this.setState(state => ({
-      books: {
-        currentlyReading: category === Constants.shelfCategory.currentlyReading ? state.books.currentlyReading.concat(book) : state.books.currentlyReading.filter(b => b.id !== book.id),
-        wantToRead: category === Constants.shelfCategory.wantToRead ? state.books.wantToRead.concat(book) : state.books.wantToRead.filter(b => b.id !== book.id),
-        read: category === Constants.shelfCategory.read ? state.books.read.concat(book) : state.books.read.filter(b => b.id !== book.id),
-      }
-    }))
-    BooksAPI.update(book, category)
+    BooksAPI.update(book, category).then((updatedShelves) => {
+      // implemet logic to update
+    })
   }
 
   render() {
