@@ -1,4 +1,4 @@
-export const shelfState = Object.freeze({
+export const shelfCategory = Object.freeze({
   'currentlyReading': 'currentlyReading',
   'wantToRead': 'wantToRead',
   'read': 'read'
