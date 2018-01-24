@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export const Book = ({book}) => {
+export class Book extends Component {
+
+  state = {
+    selected: this.props.book.shelf
+  };
+
+  handleChange = (event) => {
+    this.setState({ selected: event.target.value })
+    this.props.onUpdateBookCategory(this.props.book, event.target.value)
+  }
+
+  render() {
+    const { book } = this.props
 
     return (
       <div className="book">
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
           <div className="book-shelf-changer">
-            <select>
+            <select value={this.state.selected} onChange={(event) => this.handleChange(event)}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -20,4 +32,5 @@ export const Book = ({book}) => {
         <div className="book-authors">{book.authors[0]}</div>
       </div>
     )
+  }
 }
