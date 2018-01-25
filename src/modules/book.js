@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Book = ({book}) => {
+export const Book = ({book, onUpdateBookCategory}) => {
 
   const handleChange = (event) => {
-    this.props.onUpdateBookCategory(this.props.book, event.target.value)
+    onUpdateBookCategory(book, event.target.value)
   }
 
     return (
@@ -11,7 +11,7 @@ export const Book = ({book}) => {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
           <div className="book-shelf-changer">
-            <select value={book.shelf} onChange={(event) => this.handleChange(event)}>
+            <select value={book.shelf} onChange={(event) => handleChange(event)}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
