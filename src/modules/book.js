@@ -1,25 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class Book extends Component {
+export const Book = ({book, onUpdateBookCategory}) => {
 
-  state = {
-    selected: this.props.book.shelf
-  };
-
-  handleChange = (event) => {
-    this.setState({ selected: event.target.value })
-    this.props.onUpdateBookCategory(this.props.book, event.target.value)
+  const handleChange = (event) => {
+    onUpdateBookCategory(book, event.target.value)
   }
-
-  render() {
-    const { book } = this.props
 
     return (
       <div className="book">
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
           <div className="book-shelf-changer">
-            <select value={this.state.selected} onChange={(event) => this.handleChange(event)}>
+            <select value={book.shelf} onChange={(event) => handleChange(event)}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
@@ -32,5 +24,4 @@ export class Book extends Component {
         <div className="book-authors">{book.authors[0]}</div>
       </div>
     )
-  }
 }

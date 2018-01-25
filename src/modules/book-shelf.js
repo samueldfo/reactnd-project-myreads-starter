@@ -9,7 +9,8 @@ export class BookShelf extends Component {
     books: {
       currentlyReading: [],
       wantToRead: [],
-      read: []
+      read: [],
+      none:[],
     }
   }
 
@@ -20,20 +21,25 @@ export class BookShelf extends Component {
           currentlyReading: books.filter(book => book.shelf === Constants.shelfCategory.currentlyReading),
           wantToRead: books.filter(book => book.shelf === Constants.shelfCategory.wantToRead),
           read: books.filter(book => book.shelf === Constants.shelfCategory.read),
+          none: books.filter(book => book.shelf === Constants.shelfCategory.none),
         }
       })
     )
   }
 
   updateBookCategory = (book, category) => {
-    this.setState(state => ({
-      books: {
-        currentlyReading: category === Constants.shelfCategory.currentlyReading ? state.books.currentlyReading.concat(book) : state.books.currentlyReading.filter(b => b.id !== book.id),
-        wantToRead: category === Constants.shelfCategory.wantToRead ? state.books.wantToRead.concat(book) : state.books.wantToRead.filter(b => b.id !== book.id),
-        read: category === Constants.shelfCategory.read ? state.books.read.concat(book) : state.books.read.filter(b => b.id !== book.id),
-      }
-    }))
-    BooksAPI.update(book, category)
+    BooksAPI.update(book, category).then(() => {
+      const prevCategory = book.shelf
+      book.shelf = category
+      this.setState(state => ({
+        books: {
+          currentlyReading: prevCategory === Constants.shelfCategory.currentlyReading ? state.books.currentlyReading.filter(b => b.id !== book.id) : category === Constants.shelfCategory.currentlyReading ? state.books.currentlyReading.concat(book) : this.state.books.currentlyReading,
+          wantToRead: prevCategory === Constants.shelfCategory.wantToRead ? state.books.wantToRead.filter(b => b.id !== book.id) : category === Constants.shelfCategory.wantToRead ? state.books.wantToRead.concat(book) : this.state.books.wantToRead,
+          read: prevCategory === Constants.shelfCategory.read ? state.books.read.filter(b => b.id !== book.id) : category === Constants.shelfCategory.read ? state.books.read.concat(book) : this.state.books.read,
+          none: prevCategory === Constants.shelfCategory.none ? state.books.none.filter(b => b.id !== book.id) : category === Constants.shelfCategory.none ? state.books.none.concat(book) : this.state.books.none,
+        }
+      }))
+    })
   }
 
   render() {
@@ -50,6 +56,8 @@ export class BookShelf extends Component {
           return books.wantToRead.map(book => mountBooks(book))
         case Constants.shelfCategory.read:
           return books.read.map(book => mountBooks(book))
+        case Constants.shelfCategory.none:
+          return books.none.map(book => mountBooks(book))
         default:
           return
       }
