@@ -1,6 +1,10 @@
 
-Udacity - Nanodegree React Course
+# Udacity - Nanodegree React Course
 
-Fundamentos de React - My Reads Project
+## React Fundamentals - My Reads Project
 
-For running the project, simply run `yarn install` once and `yarn start` after that.
+## Running the project
+
+- Before running the project, install all dependencies: `yarn install`  (**make sure you have yarn installed**)
+
+- Then simply, run: `yarn start`.
